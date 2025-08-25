@@ -67,13 +67,16 @@ N.B. This is just validating that a valid context exists that is > 10 characters
 6. Open an incognito window and login to HR via: https://{your_db_url}/ords/hr/_sdw/?nav=worksheet
 7. As HR, Validate that you can see the tables you added and content in the tables EXCEPT for in employees
 - e.g. Countries table should have Data and employees should NOT show any
-8. As HR, Now, test the Access Predicate by granting yourself a context as HR, to do this execute the following and check the employees table for data.
+8. As HR, Now, test the Access Predicate by granting yourself a context as HR, to do this execute the following and check the employees table for data - sample validation code.
+/* Begin */
+SELECT * FROM employees;
 BEGIN
  set_security_proc('google-oauth2|103699938906');
 END;
 /
 SELECT * FROM employees;
 SELECT SYS_CONTEXT('ords_ctx', 'auth0_id');
+/* End */
 
 If you see the rows in employees, success - you have a working RLS policy w/ an access predicate.
 
