@@ -1,10 +1,35 @@
-# The getting started template to connect to Oracle ORDS using React & NextJS
+*** N.B. This guide is a high-level guide that is not meant to be all inclusive of all standard production settings you will want. ***
+*** Carefully review the performance, logging, observability, security, etc. before doing ANYTHING for production. ***
+*** Examples of missing production resources: fine-grained access control, load balancers, APM, API gateways, API docs, domain name/SSL on ORDS, etc. ***
 
+# The getting started template to connect to Oracle ORDS using React & NextJS
 This demonstration will get you up and running with React as the frontend and Oracle ORDS as your backend. 
 The use of the NextJS middleware is optional, and very useful for situations where you cannot expose secrets in your front end package,
 however for this basic example, we will bypass the use of middleware and communicate directly with a public ORDS endpoint, and render its 
 result to the front end component. 
 
+There are three parts:
+1. Launch an Oracle ATP & Deploy Data Model w/ RLS
+2. Deploy Stand-alone ORDS
+3. Launch your NextJS App w/ Auth0
+
+Pre-requisites:
+Running Auth0 server to issue JWT tokens for users.
+
+## Step 1 - Launch and Oracle ATP & Deploy Data Model w/ RLS
+1. Deploy ATP Resource
+2. Deploy Data Model
+3. Deploy RLS Policies
+4. Link ATP ORDS to Auth0
+5. Configure ORDS for Objects
+
+## Step 2 - Deploy Stand-alone ORDS
+1. Deploy an Oracle Linux VM
+2. Install and Configure ORDS
+
+
+
+## Step 3 - Launch your NextJS App w/ Auth0
 
 ### 1. Initialize React & NextJS
 Run in your console to install the boilerplate code from NextJS https://nextjs.org/ https://nextjs.org/docs
