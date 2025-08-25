@@ -69,17 +69,17 @@ N.B. This is just validating that a valid context exists that is > 10 characters
 7. As HR, Validate that you can see the tables you added and content in the tables EXCEPT for in employees
 - e.g. Countries table should have Data and employees should NOT show any
 8. As HR, Now, test the Access Predicate by granting yourself a context as HR, to do this execute the following and check the employees table for data - sample validation code.
-/* Begin */
-SELECT * FROM employees;
-BEGIN
- set_security_proc('google-oauth2|103699938906');
-END;
-/
-SELECT * FROM employees;
-SELECT SYS_CONTEXT('ords_ctx', 'auth0_id');
-/* End */
-
-If you see the rows in employees, success - you have a working RLS policy w/ an access predicate.
+/* Begin */  
+SELECT * FROM employees;  
+BEGIN  
+ set_security_proc('google-oauth2|103699938906');  
+END;  
+/  
+SELECT * FROM employees;  
+SELECT SYS_CONTEXT('ords_ctx', 'auth0_id');  
+/* End */  
+  
+If you see the rows in employees, success - you have a working RLS policy w/ an access predicate.  
 
 
 
@@ -115,12 +115,12 @@ N.B. We are setting this up to NOT require authentication to make it easy to tes
 - Then, create a template for URI template, current_user - or do w/ code: db/scripts/create_template.sql
 - Then, create a handler for getting the current user - or do w/ code: db/scripts/create_handler.sql
 - Now - open the URL for what you just created: https://{atp-instance-url}/ords/hr/user/current_user
--- If you are logged in via the web and access this URL as HR you will see that you have a value of HR returned
--- If you open this in an unauthenticated window, no results (null) will be returned
--- If you access this w/ a JWT token, you will get the Auth0 ID of the user from the JWT
---- To get a valid JWT token, get one through Auth0 - many ways to get, two easiest are:
----- Option A: Create an API set of Credentials (Applications -> APIs) and then issue a JWT
----- Option B: Login to a web-app connected to Auth0 and get the JWT token
+-- If you are logged in via the web and access this URL as HR you will see that you have a value of HR returned  
+-- If you open this in an unauthenticated window, no results (null) will be returned  
+-- If you access this w/ a JWT token, you will get the Auth0 ID of the user from the JWT  
+--- To get a valid JWT token, get one through Auth0 - many ways to get, two easiest are:  
+---- Option A: Create an API set of Credentials (Applications -> APIs) and then issue a JWT  
+---- Option B: Login to a web-app connected to Auth0 and get the JWT token  
 
 4. Set the ORDS Pre-hook function up: db/scripts/create_ords_prehook.sql
 - This is what will auto-set the context for a user based on their user value
@@ -158,46 +158,47 @@ java -version
 sudo yum install ords
 
 - Upload the connection wallet via SFTP
--- Download from Oracle Console and upload w/ tool of preference to the Linux server you just created
--- e.g. Wallet_GettingStartedGuide.zip
+-- Download from Oracle Console and upload w/ tool of preference to the Linux server you just created  
+-- e.g. Wallet_GettingStartedGuide.zip  
 
 - Set-up ORDS for ATP
--- N.B. DO NOT USE THIS CONFIG IN PRODUCTION!!!!
+-- N.B. DO NOT USE THIS CONFIG IN PRODUCTION!!!!  
 
 ords --config ords-config install adb
 
--- Enter path to wallet when prompted relative to current working directory
--- Pick a service, e.g. Low
--- Enter ADMIN Credentials
--- Use default ORDS runtime username
--- (not optimal) set the PL/SQL gateway user as same as runtime
--- Configure all features
--- Configure and start
--- Use http for the demo
--- Use default port 8080 for demo
--- Skip entering static assets path for demo
--- If when starting the server it gives a password error, reset the ORDS runtime user password
--- Then close the ORDS server and open the firewall up
-sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp
-sudo firewall-cmd --reload
-
--- Set the ORDS pre-hook to run
-ords --config ords-config config set procedure.rest.preHook hr.identity_hook
-
--- Start ORDS
-ords --config ords-config serve
--- Try to access w/ another computer using IP of the VM
---- e.g. http://{ipAddressofVM}:8080/ords/hr/user/current_user
-
-You should get the payload of the user test from before with a NULL current user if set-up properly!
-
-3. Test the Pre-hook w/ a JWT token from Auth0!
-- Go to the same URL w/ a valid JWT attached: http://{ipAddressofVM}:8080/ords/hr/user/current_user
--- If successful, you will see the user ID from Auth0 
-
-- Try to load the employees page w/ a JWT set as your bearer token to standalone ORDS: http://{ipAddressofVM}:8080/ords/hr/employees/
--- If successful, you will see the 
--- If not successful, you will get no results
+-- Enter path to wallet when prompted relative to current working directory  
+-- Pick a service, e.g. Low  
+-- Enter ADMIN Credentials  
+-- Use default ORDS runtime username  
+-- (not optimal) set the PL/SQL gateway user as same as runtime  
+-- Configure all features  
+-- Configure and start  
+-- Use http for the demo  
+-- Use default port 8080 for demo  
+-- Skip entering static assets path for demo  
+-- If when starting the server it gives a password error, reset the ORDS runtime user password  
+-- Then close the ORDS server and open the firewall up  
+sudo firewall-cmd --zone=public --permanent --add-port=8080/tcp  
+sudo firewall-cmd --reload  
+  
+-- Set the ORDS pre-hook to run  
+ords --config ords-config config set procedure.rest.preHook hr.identity_hook  
+  
+-- Start ORDS  
+ords --config ords-config serve   
+-- Try to access w/ another computer using IP of the VM  
+--- e.g. http://{ipAddressofVM}:8080/ords/hr/user/current_user  
+  
+You should get the payload of the user test from before with a NULL current user if set-up properly!  
+   
+3. Test the Pre-hook w/ a JWT token from Auth0!  
+- Go to the same URL w/ a valid JWT attached: http://{ipAddressofVM}:8080/ords/hr/user/current_user  
+-- If successful, you will see the user ID from Auth0   
+   
+- Try to load the employees page w/ a JWT set as your bearer token to standalone ORDS: http://{ipAddressofVM}:8080/ords/hr/employees/  
+-- If successful, you will see the   
+-- If not successful, you will get no results  
+-- If not successful, you will get no results  
 
 
 
