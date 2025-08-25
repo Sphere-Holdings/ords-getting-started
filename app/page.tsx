@@ -12,7 +12,7 @@ export default function Home() {
     setError(null);
     try {
       const endpoint = process.env.NEXT_PUBLIC_ORDS_ENDPOINT;
-      const url = `${endpoint}/cephisso_system/test/user`;
+      const url = `${endpoint}/ords/hr/countries/`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`HTTP error: status: ${res.status}`);
       const json = await res.json();
