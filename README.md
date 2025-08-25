@@ -1,6 +1,6 @@
-*** N.B. This guide is a high-level guide that is not meant to be all inclusive of all standard production settings you will want. ***
-*** Carefully review the performance, logging, observability, security, etc. before doing ANYTHING for production. ***
-*** Examples of missing production resources: fine-grained access control, load balancers, APM, API gateways, API docs, domain name/SSL on ORDS, use PoLP on all accounts and access, protect your pre-hook functions, etc. ***
+*** N.B. This guide is a high-level guide that is not meant to be all inclusive of all standard production settings you will want. ***  
+*** Carefully review the performance, logging, observability, security, etc. before doing ANYTHING for production. ***  
+*** Examples of missing production resources: fine-grained access control, load balancers, APM, API gateways, API docs, domain name/SSL on ORDS, use PoLP on all accounts and access, protect your pre-hook functions, etc. ***  
 
 # The getting started template to connect to Oracle ORDS using React & NextJS
 This demonstration will get you up and running with React as the frontend and Oracle ORDS as your backend. 
