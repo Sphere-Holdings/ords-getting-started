@@ -195,8 +195,9 @@ You should get the payload of the user test from before with a NULL current user
 - Go to the same URL w/ a valid JWT attached: http://{ipAddressofVM}:8080/ords/hr/user/current_user
 -- If successful, you will see the user ID from Auth0 
 
-
-3. Set the Pre-hook (might belong higher up) to auto-set context
+- Try to load the employees page w/ a JWT set as your bearer token to standalone ORDS: http://{ipAddressofVM}:8080/ords/hr/employees/
+-- If successful, you will see the 
+-- If not successful, you will get no results
 
 
 
